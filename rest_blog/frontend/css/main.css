@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0
+}
+
+body {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 15vh;
+    border: solid 2px black;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center
+}
+
+.home {
+    text-decoration: none;
+    color: black;
+    font-size: 3vh;
+}
+
+select {
+    font-size: 3vh;
+    border: none;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+main {
+    padding: 0
+}

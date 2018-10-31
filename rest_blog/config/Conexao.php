@@ -1,4 +1,4 @@
- <?php
+<?php
 
 
 /*
@@ -20,7 +20,7 @@ class Conexao {
 		$this->conexao = null;
 
 		try {
-			$this->conexao = new PDO('mysql:host='.$this->host.';dbname='.$this->dbname, $this->user, $this->passwd);
+			$this->conexao = new PDO('mysql:host='.$this->host.';dbname='.$this->dbname.';charset=utf8', $this->user, $this->passwd);
 		} catch(PDOException $e) {
 			echo "Erro na conexão: " . $e->getMessage();
 		}

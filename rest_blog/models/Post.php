@@ -20,16 +20,19 @@ class Post {
 
 	/* O método read() deverá efetuar uma consulta SQL na tabela categoria, e retornar o resultado */
 
-	public function read($id=null) {
-		if (!isset($id)) {
-			$consulta = "SELECT * FROM post ORDER BY titulo";
+	public function read($id=null, $id_categoria=null) {
+		if(isset($id_categoria)) {
+			$consulta = "SELECT * FROM post p WHERE id_categoria = :id_categoria";
 			$stmt = $this->conexao->prepare($consulta);
-		} else {
+			$stmt = $this->bindParam('id_categoria', $id_categoria);
+		}else if(isset($id)) {
 			$consulta = "SELECT * FROM post WHERE id = :id";
 			$stmt = $this->conexao->prepare($consulta);
 			$stmt = $this-> bindParam('id', $id);
+		}else{
+			$consulta = "SELECT * FROM post ORDER BY titulo";
+			$stmt = $this->conexao->prepare($consulta);
 		}
-		
 		try{
 			$stmt->execute();
 			$resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -60,10 +63,10 @@ class Post {
 		$stmt->bindParam('titulo', $this->titulo, PDO::PARAM_STR);
 		$stmt->bindParam('texto', $this->texto, PDO::PARAM_STR);
 		$stmt->bindParam('id_categoria', $this->id_categoria, PDO::PARAM_INT);
-		$stmt->bindParam('autor', $this->autor, PDO::PARAM_STR);		
+		$stmt->bindParam('autor', $this->autor, PDO::PARAM_STR);
 		if ($stmt->execute()) {
 			return "true";
-		} else {
+		} else {	
 			return "false";
 		}	
 	}
