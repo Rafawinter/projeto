@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>blog</title>
+
+        <script>
+        
+        function geraMenu(itens){
+            var ul = document.querySelector("#menu");
+            for (i=0; i<itens.length; i++){
+                var li = document.createElement("li");
+                var a = document.createElement("a");
+                var href = document.createAttribute("href", "#");
+                var txt = document.createTextNode(itens[i].nome);
+                a.appendChild(txt);
+                a.setAttributeNode(href);
+                li.appendChild(a);
+                ul.appendChild(li);
+            }
+        }
+
+
+        document.addEventListener("DOMContentLoaded", function(event) {
+        //   var dados = '[{"id":1, "nome":"esportes"}, {"id":2, "nome": "Tecnologia"}]';
+        //   dados = JSON.parse(dados);
+        //   geraMenu(dados);            
+
+            //dados virao da requisição XMLHTTPRequest
+            var xhr = new XMLHttpRequest;
+            xhr.open('GET', 'http://localhost/rest_blog/api/categoria/read.php', true);
+            xhr.onreadystatechange = function () {
+                if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    dados = JSON.parse(xhr.responseText);
+                    geraMenu(dados);
+                }
+            };
+            xhr.send();
+        });        
+        </script>
+    </head>
+    <body>
+        <header>
+            <ul id="menu">
+            </ul>
+        </header>
+    </body>
+
+    
+    
+</html>
